@@ -21,6 +21,7 @@ public class Card {
     @Column(name = "Description")
     private String description;
 
+    public  Card(){}
     public Card(int id, String firstName, String lastName, int age, String description) {
         this.id = id;
         this.firstName = firstName;
