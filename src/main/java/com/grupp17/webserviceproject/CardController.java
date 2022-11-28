@@ -16,9 +16,28 @@ public class CardController {
     public ResponseEntity<Card> createCard(@RequestBody final Card card){
         try {
             Card _card = cardRepository.save(card);
-
             return new ResponseEntity<>(_card, HttpStatus.CREATED);
         } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/cards")
+    public ResponseEntity showCards(){
+        try{
+            return ResponseEntity.ok(this.cardRepository.findAll());
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @GetMapping("/cards/{cardid}")
+    public ResponseEntity showCards(@PathVariable Long cardid){
+        try{
+            return ResponseEntity.ok(this.cardRepository.findById(cardid));
+        }
+        catch(Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
