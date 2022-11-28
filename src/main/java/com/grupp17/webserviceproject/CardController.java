@@ -5,6 +5,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 public class CardController {
     private final CardRepository cardRepository;
@@ -22,7 +25,7 @@ public class CardController {
         }
     }
     @GetMapping("/cards")
-    public ResponseEntity showCards(){
+    public ResponseEntity<List<Card>> showCards(){
         try{
             return ResponseEntity.ok(this.cardRepository.findAll());
         }
@@ -33,7 +36,7 @@ public class CardController {
     }
 
     @GetMapping("/cards/{cardid}")
-    public ResponseEntity showCards(@PathVariable Long cardid){
+    public ResponseEntity<Optional<Card>> showCards(@PathVariable Long cardid){
         try{
             return ResponseEntity.ok(this.cardRepository.findById(cardid));
         }
