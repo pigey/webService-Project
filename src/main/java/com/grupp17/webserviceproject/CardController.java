@@ -55,4 +55,22 @@ public class CardController {
         }
     }
 
+    @PutMapping("/cards/{cardId}")
+    public ResponseEntity<Card> updateCardFirstName(@PathVariable Long cardId, @RequestBody final Card card){
+        try{
+            Optional<Card> cardOptional = cardRepository.findById(cardId);
+            Card cardEntity = cardOptional.get();
+
+            cardEntity.setFirstName(card.getFirstName());
+            cardEntity.setLastName(card.getLastName());
+            cardEntity.setAge(card.getAge());
+            cardEntity.setDescription(card.getDescription());
+
+            return new ResponseEntity<>(cardEntity, HttpStatus.ACCEPTED);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }
