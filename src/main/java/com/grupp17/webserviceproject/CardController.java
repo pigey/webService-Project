@@ -23,4 +23,14 @@ public class CardController {
         }
     }
 
+    @DeleteMapping("/cards/{cardId}")
+    public void deleteCard(@PathVariable("cardId") Long cardId) {
+        try {
+            cardRepository.deleteById(cardId);
+            System.out.println(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            System.out.println(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
