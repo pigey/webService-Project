@@ -12,18 +12,17 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "First_Name")
+    @Column(name = "first_Name", nullable = false)
     private String firstName;
-    @Column(name = "Last_Name")
+    @Column(name = "last_Name", nullable = false)
     private String lastName;
-    @Column(name = "Age")
+    @Column(name = "age")
     private int age;
-    @Column(name = "Description")
+    @Column(name = "description")
     private String description;
 
     public  Card(){}
-    public Card(int id, String firstName, String lastName, int age, String description) {
-        this.id = id;
+    public Card(String firstName, String lastName, int age, String description) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
