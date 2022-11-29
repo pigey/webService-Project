@@ -26,7 +26,7 @@ public class Card {
     @Column(name = "last_Name", nullable = false)
     private String lastName;
     @Column(name = "age")
-    private int age;
+    private Integer age;
     @Column(name = "description")
     private String description;
 
