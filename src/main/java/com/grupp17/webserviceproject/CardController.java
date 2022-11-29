@@ -45,6 +45,17 @@ public class CardController {
         }
     }
 
+    @GetMapping("/cards/age")
+    public ResponseEntity<List<Card>>orderByAge(){
+        try{
+            return ResponseEntity.ok(this.cardRepository.orderByAge());
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
     @DeleteMapping("/cards/{cardId}")
     public void deleteCard(@PathVariable("cardId") Long cardId) {
         try {
@@ -65,7 +76,7 @@ public class CardController {
             cardEntity.setLastName(card.getLastName());
             cardEntity.setAge(card.getAge());
             cardEntity.setDescription(card.getDescription());
-
+            cardRepository.save(cardEntity);
             return new ResponseEntity<>(cardEntity, HttpStatus.ACCEPTED);
         } catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
