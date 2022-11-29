@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>test</title>
+</head>
+<body>
+    <h1>hallo</h1>
+    <table>
+        <tr th:each="card: ${allCards}">
+            <td th:text="${card.getFirstName()}"></td>
+            <td th:text="${card.getLastName()}"></td>
+            <td th:text="${card.getAge()}"></td>
+            <td th:text="${card.getDescription()}"></td>
+        </tr>
+    </table>
+
+</body>
+</html>

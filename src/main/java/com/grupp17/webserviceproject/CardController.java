@@ -3,12 +3,16 @@ package com.grupp17.webserviceproject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
+
 public class CardController {
     private final CardRepository cardRepository;
     @Autowired
@@ -63,6 +67,23 @@ public class CardController {
         catch (Exception e){
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    @GetMapping("/cards/firstName")
+    public ResponseEntity<List<Card>>orderByFirstName(){
+        try {
+            return ResponseEntity.ok(this.cardRepository.orderByFirstName());
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping("/testa")
+    public ModelAndView index () {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("testa");
+        modelAndView.addObject("allCards", cardRepository.orderByFirstName());
+        return modelAndView;
     }
 
     @DeleteMapping("/cards/{cardId}")

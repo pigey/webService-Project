@@ -14,4 +14,7 @@ public interface CardRepository extends JpaRepository<Card, Long>{
 
     @Query("SELECT s FROM Card s ORDER BY s.lastName asc")
     List<Card> orderByLastName();
+
+    @Query("SELECT s FROM Card s ORDER BY s.firstName asc")
+    List<Card> orderByFirstName();
 }
