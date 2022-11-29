@@ -55,6 +55,15 @@ public class CardController {
         }
 
     }
+    @GetMapping("/cards/lastName")
+    public ResponseEntity<List<Card>>orderByLastName(){
+        try {
+            return ResponseEntity.ok(this.cardRepository.orderByLastName());
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @DeleteMapping("/cards/{cardId}")
     public void deleteCard(@PathVariable("cardId") Long cardId) {

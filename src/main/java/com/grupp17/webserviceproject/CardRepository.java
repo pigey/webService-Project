@@ -11,4 +11,7 @@ import java.util.List;
 public interface CardRepository extends JpaRepository<Card, Long>{
     @Query("SELECT s FROM Card s ORDER BY s.age desc")
     List<Card> orderByAge();
+
+    @Query("SELECT s FROM Card s ORDER BY s.lastName asc")
+    List<Card> orderByLastName();
 }
