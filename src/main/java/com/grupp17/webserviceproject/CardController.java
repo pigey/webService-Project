@@ -3,8 +3,6 @@ package com.grupp17.webserviceproject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-
 public class CardController {
     private final CardRepository cardRepository;
     @Autowired
@@ -113,5 +110,32 @@ public class CardController {
         }
     }
 
+    @GetMapping("/cards/create")
+    public ModelAndView addNewCardView () {
+        try{
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("addcard");
+            modelAndView.addObject("oneCard", new Card());
+            return modelAndView;
+        } catch (Exception e) {
+            return new ModelAndView().addObject(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @PostMapping("/cards/create")
+    public String addNewCard(Card card) {
+
+        try {
+            cardRepository.save(card);
+            return "Success!" + "<form th:action=\"@{/testa}\">\n" +
+                    "  <input  type=\"submit\" value=\"Back\"/>\n" +
+                    "</form>";
+        } catch (Exception e) {
+            return "Oops! Error!" + "<form th:action=\"@{/cards/create}\">\n" +
+                    "  <input  type=\"submit\" value=\"Back\"/>\n" +
+                    "</form>";
+        }
+    }
 
 }
