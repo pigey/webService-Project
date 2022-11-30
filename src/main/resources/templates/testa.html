@@ -3,17 +3,67 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>test</title>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .grid-container {
+            position: absolute;
+            width: 100%;
+            top: 60px;
+            display: grid;
+            justify-content: space-evenly;
+            grid-template-columns: auto auto auto;
+            gap:5px;
+            padding: 10px;
+        }
+
+        .grid-item {
+            display: grid;
+            gap: 10px;
+            width: 350px;
+            height: 200px;
+            background-color: #17141d;
+            border-radius: 10px;
+            box-shadow: -1rem 0 3rem #000;
+            margin: 10px;
+            padding: 10px;
+        }
+
+
+
+        p {
+            color: white;
+            font-weight: 300;
+            display: block;
+            left: 20px;
+            margin: 0;
+        }
+
+        title {
+            top: 15px;
+        }
+
+
+
+
+    </style>
 </head>
 <body>
-    <h1>hallo</h1>
-    <table>
-        <tr th:each="card: ${allCards}">
-            <td th:text="${card.getFirstName()}"></td>
-            <td th:text="${card.getLastName()}"></td>
-            <td th:text="${card.getAge()}"></td>
-            <td th:text="${card.getDescription()}"></td>
-        </tr>
-    </table>
+
+    <div class="grid-container">
+        <div class="grid-item" th:each="card:${allCards}">
+            <p th:text="'Id:' + ' ' + ${card.getId()}"></p>
+            <p class="title" th:text="'Name:' + ' ' + ${card.getFirstName()} + ' ' + ${card.getLastName()}"></p>
+            <p th:text="'Age:' + ' ' + ${card.getAge()}"></p>
+            <p th:text="'Description:' + ' ' + ${card.getDescription()}"></p>
+
+        </div>
+        </div>
+
+    </div>
+
 
 </body>
 </html>
