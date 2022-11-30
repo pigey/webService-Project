@@ -75,7 +75,7 @@ public class CardController {
         }
     }
 
-    @RequestMapping("/testa")
+    @RequestMapping("/")
     public ModelAndView index () {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("testa");
@@ -128,7 +128,7 @@ public class CardController {
 
         try {
             cardRepository.save(card);
-            return "Success!" + "<form th:action=\"@{/testa}\">\n" +
+            return "Success!" + "<form th:action=\"@{/}\">\n" +
                     "  <input  type=\"submit\" value=\"Back\"/>\n" +
                     "</form>";
         } catch (Exception e) {
