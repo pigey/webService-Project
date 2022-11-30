@@ -17,4 +17,9 @@ public interface CardRepository extends JpaRepository<Card, Long>{
 
     @Query("SELECT s FROM Card s ORDER BY s.firstName asc")
     List<Card> orderByFirstName();
+
+    //en som hämtar alla med samma förnamn (martin)
+    //en som hämtar alla av samma efternamn
+
+    // hämta alla över en viss ålder (robin)
 }
