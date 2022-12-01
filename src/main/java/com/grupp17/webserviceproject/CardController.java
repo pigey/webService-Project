@@ -20,12 +20,7 @@ public class CardController {
 
     @PostMapping("/cards")
     public ResponseEntity<Card> createCard(@RequestBody final Card card){
-        try {
-            Card _card = cardRepository.save(card);
-            return new ResponseEntity<>(_card, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+       return cardServiceimpl.createCard(card);
     }
     @GetMapping("/cards")
     public ResponseEntity<List<Card>> showCards(){
@@ -43,28 +38,18 @@ public class CardController {
     }
     @GetMapping("/cards/lastName")
     public ResponseEntity<List<Card>>orderByLastName(){
-        try {
-            return ResponseEntity.ok(this.cardRepository.orderByLastName());
-        }
-        catch (Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+       return cardServiceimpl.orderByLastName();
     }
     @GetMapping("/cards/firstName")
     public ResponseEntity<List<Card>>orderByFirstName(){
-        try {
-            return ResponseEntity.ok(this.cardRepository.orderByFirstName());
-        }
-        catch (Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return cardServiceimpl.orderByFirstName();
     }
 
     @RequestMapping("/testa")
     public ModelAndView index () {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("testa");
-        modelAndView.addObject("allCards", cardRepository.orderByFirstName());
+        modelAndView.addObject("allCards", cardServiceimpl.orderByFirstName());
         return modelAndView;
     }
 
