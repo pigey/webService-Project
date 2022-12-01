@@ -1,10 +1,8 @@
 package com.grupp17.webserviceproject;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.grupp17.webserviceproject.service.CardServiceimpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,11 +12,12 @@ import java.util.Optional;
 @RestController
 
 public class CardController {
-    private final CardRepository cardRepository;
-    @Autowired
-    public CardController(CardRepository cardRepository) {
-        this.cardRepository = cardRepository;
+    private final CardServiceimpl cardServiceimpl;
+
+    public CardController(CardServiceimpl cardServiceimpl) {
+        this.cardServiceimpl = cardServiceimpl;
     }
+
     @PostMapping("/cards")
     public ResponseEntity<Card> createCard(@RequestBody final Card card){
         try {
@@ -30,34 +29,17 @@ public class CardController {
     }
     @GetMapping("/cards")
     public ResponseEntity<List<Card>> showCards(){
-        try{
-            return ResponseEntity.ok(this.cardRepository.findAll());
-        }
-        catch(Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
+     return cardServiceimpl.showCards();
     }
 
     @GetMapping("/cards/{cardid}")
     public ResponseEntity<Optional<Card>> showCards(@PathVariable Long cardid){
-        try{
-            return ResponseEntity.ok(this.cardRepository.findById(cardid));
-        }
-        catch(Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+      return cardServiceimpl.getCardId(cardid);
     }
 
     @GetMapping("/cards/age")
     public ResponseEntity<List<Card>>orderByAge(){
-        try{
-            return ResponseEntity.ok(this.cardRepository.orderByAge());
-        }
-        catch(Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
+        return cardServiceimpl.orderByAge();
     }
     @GetMapping("/cards/lastName")
     public ResponseEntity<List<Card>>orderByLastName(){
