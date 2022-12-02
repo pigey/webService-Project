@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-
 public class CardController {
     private final CardServiceimpl cardServiceimpl;
 
@@ -45,7 +44,7 @@ public class CardController {
         return cardServiceimpl.orderByFirstName();
     }
 
-    @RequestMapping("/testa")
+    @RequestMapping("/")
     public ModelAndView index () {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("testa");
@@ -80,5 +79,32 @@ public class CardController {
         }
     }
 
+    @GetMapping("/cards/create")
+    public ModelAndView addNewCardView () {
+        try{
+            ModelAndView modelAndView = new ModelAndView();
+            modelAndView.setViewName("addcard");
+            modelAndView.addObject("oneCard", new Card());
+            return modelAndView;
+        } catch (Exception e) {
+            return new ModelAndView().addObject(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+
+    @PostMapping("/cards/create")
+    public String addNewCard(Card card) {
+
+        try {
+            cardRepository.save(card);
+            return "Success!" + "<form th:action=\"@{/}\">\n" +
+                    "  <input  type=\"submit\" value=\"Back\"/>\n" +
+                    "</form>";
+        } catch (Exception e) {
+            return "Oops! Error!" + "<form th:action=\"@{/cards/create}\">\n" +
+                    "  <input  type=\"submit\" value=\"Back\"/>\n" +
+                    "</form>";
+        }
+    }
 
 }

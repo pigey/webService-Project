@@ -2,16 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>test</title>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+    <title>Card App</title>
     <style>
         body {
             font-family: 'Open Sans', sans-serif;
         }
 
+        .pageheader{
+            padding-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            color: #17141d;
+            text-align: center;
+            font-family: 'Permanent Marker', cursive;
+            margin: 1rem;
+        }
+
         .grid-container {
             position: absolute;
             width: 100%;
-            top: 60px;
+            top: 100px;
             display: grid;
             justify-content: space-evenly;
             grid-template-columns: auto auto auto;
@@ -41,8 +56,9 @@
             margin: 0;
         }
 
-        title {
+        .title {
             top: 15px;
+            font-size: 20px;
         }
 
 
@@ -52,15 +68,21 @@
 </head>
 <body>
 
+    <div class="pageheader">
+        <h1>Card App</h1>
+        <form th:action="@{/cards/create}">
+            <input  type="submit" value="Add New Card"/>
+        </form>
+    </div>
     <div class="grid-container">
         <div class="grid-item" th:each="card:${allCards}">
-            <p th:text="'Id:' + ' ' + ${card.getId()}"></p>
+            <p class="id" th:text="'Id:' + ' ' + ${card.getId()}"></p>
             <p class="title" th:text="'Name:' + ' ' + ${card.getFirstName()} + ' ' + ${card.getLastName()}"></p>
             <p th:text="'Age:' + ' ' + ${card.getAge()}"></p>
             <p th:text="'Description:' + ' ' + ${card.getDescription()}"></p>
 
         </div>
-        </div>
+    </div>
 
     </div>
 
