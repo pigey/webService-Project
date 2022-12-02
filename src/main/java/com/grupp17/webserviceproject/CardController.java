@@ -1,8 +1,8 @@
 package com.grupp17.webserviceproject;
 
 import com.grupp17.webserviceproject.service.CardServiceimpl;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -46,65 +46,28 @@ public class CardController {
 
     @RequestMapping("/")
     public ModelAndView index () {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("testa");
-        modelAndView.addObject("allCards", cardServiceimpl.orderByFirstName());
-        return modelAndView;
+        return cardServiceimpl.index();
     }
 
     @DeleteMapping("/cards/{cardId}")
     public void deleteCard(@PathVariable("cardId") Long cardId) {
-        try {
-            cardRepository.deleteById(cardId);
-            System.out.println(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            System.out.println(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
     @PutMapping("/cards/{cardId}")
     public ResponseEntity<Card> updateCardFirstName(@PathVariable Long cardId, @RequestBody final Card card){
-        try{
-            Optional<Card> cardOptional = cardRepository.findById(cardId);
-            Card cardEntity = cardOptional.get();
-
-            cardEntity.setFirstName(card.getFirstName());
-            cardEntity.setLastName(card.getLastName());
-            cardEntity.setAge(card.getAge());
-            cardEntity.setDescription(card.getDescription());
-            cardRepository.save(cardEntity);
-            return new ResponseEntity<>(cardEntity, HttpStatus.ACCEPTED);
-        } catch (Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return cardServiceimpl.updateCardFirstName(cardId, card);
     }
 
     @GetMapping("/cards/create")
     public ModelAndView addNewCardView () {
-        try{
-            ModelAndView modelAndView = new ModelAndView();
-            modelAndView.setViewName("addcard");
-            modelAndView.addObject("oneCard", new Card());
-            return modelAndView;
-        } catch (Exception e) {
-            return new ModelAndView().addObject(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
+        return cardServiceimpl.addNewCardView();
     }
 
     @PostMapping("/cards/create")
     public String addNewCard(Card card) {
-
-        try {
-            cardRepository.save(card);
-            return "Success!" + "<form th:action=\"@{/}\">\n" +
-                    "  <input  type=\"submit\" value=\"Back\"/>\n" +
-                    "</form>";
-        } catch (Exception e) {
-            return "Oops! Error!" + "<form th:action=\"@{/cards/create}\">\n" +
-                    "  <input  type=\"submit\" value=\"Back\"/>\n" +
-                    "</form>";
-        }
+        return cardServiceimpl.addNewCard(card);
     }
+
+
 
 }
