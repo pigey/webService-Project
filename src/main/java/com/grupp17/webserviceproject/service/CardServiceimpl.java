@@ -46,4 +46,14 @@ public class CardServiceimpl implements CardService {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Override
+    public ResponseEntity<List<Card>> orderByFirstName() {
+        try {
+            return ResponseEntity.ok(this.cardRepository.orderByFirstName());
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

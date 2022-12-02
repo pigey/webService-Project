@@ -52,12 +52,7 @@ public class CardController {
     }
     @GetMapping("/cards/firstName")
     public ResponseEntity<List<Card>>orderByFirstName(){
-        try {
-            return ResponseEntity.ok(this.cardRepository.orderByFirstName());
-        }
-        catch (Exception e){
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+      return cardServiceimpl.orderByFirstName();
     }
 
     @RequestMapping("/testa")

@@ -9,6 +9,6 @@ import java.util.Optional;
 public interface CardService {
     ResponseEntity<List<Card>> showCards();
     ResponseEntity <Optional<Card>>getCardId(long cardid);
-
     ResponseEntity <List<Card>> orderByAge();
-}
+    ResponseEntity<List<Card>>orderByFirstName();
+    }
