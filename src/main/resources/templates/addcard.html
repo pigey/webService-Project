@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+  <title>Add New Card</title>
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    .pageheader{
+      padding-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    h1 {
+      color: #152c56;
+      text-align: center;
+      font-family: 'Permanent Marker', cursive;
+      margin: 1rem;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+  </style>
+
+</head>
+<body>
+<div class="pageheader">
+  <h1>Add your information:</h1>
+</div>
+
+<div class="form">
+  <form th:action="@{/cards/create}" th:object="${oneCard}" method="post">
+    <p>First Name: <input type="text" th:field="*{firstName}" /></p>
+    <p>Last Name: <input type="text" th:field="*{lastName}" /></p>
+    <p>Age: <input type="text" th:field="*{age}" /></p>
+    <p>Description: <input type="text" th:field="*{description}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+  </form>
+</div>
+
+<form th:action="@{/}">
+  <input  type="submit" value="Back"/>
+</form>
+
+</body>
+</html>
