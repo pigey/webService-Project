@@ -80,12 +80,30 @@
             <p class="title" th:text="'Name:' + ' ' + ${card.getFirstName()} + ' ' + ${card.getLastName()}"></p>
             <p th:text="'Age:' + ' ' + ${card.getAge()}"></p>
             <p th:text="'Description:' + ' ' + ${card.getDescription()}"></p>
-
+            <button
+               th:with="url = @{'/cards/{id}'(id=${card.getId()})}"
+               th:onclick="sendDelete([[${url}]])"
+            >Delete</button>
         </div>
     </div>
-
     </div>
 
+    <script>
+    function easyHTTP() {this.http =new XMLHttpRequest();}  easyHTTP.prototype.delete  =function (url, callback) {this.http.open("DELETE", url,true);
+    let self =this;
+        this.http.onload =function ()
+        {if (self.http.status === 200){
+        callback(null,"Post Deleted");    }
+        else {callback("Error: " + self.http.status);
+        }
+        };
+        this.http.send();
+        };
+            function sendDelete(url){
+            const http =new easyHTTP();
+            http.delete(url,
+            function (  err,  response) {  if (err) {    console.log(err);  }else {    console.log(response);  }});
+            }</script>
 
 </body>
 </html>

@@ -26,5 +26,6 @@ public interface CardService {
     public ModelAndView addNewCardView ();
     String addNewCard(Card card);
 
+    ResponseEntity<List<Card>>isPersonOfAge(int cardAge);
 
 }

@@ -51,6 +51,7 @@ public class CardController {
 
     @DeleteMapping("/cards/{cardId}")
     public void deleteCard(@PathVariable("cardId") Long cardId) {
+        cardServiceimpl.deleteCard(cardId);
     }
 
     @PutMapping("/cards/{cardId}")
@@ -68,6 +69,9 @@ public class CardController {
         return cardServiceimpl.addNewCard(card);
     }
 
-
+    @GetMapping("/cards/age/{cardage}")
+    public ResponseEntity<List<Card>>isPersonOfAge(@PathVariable int cardAge){
+        return cardServiceimpl.isPersonOfAge(cardAge);
+    }
 
 }
