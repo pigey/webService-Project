@@ -86,6 +86,24 @@ public class CardController {
         return modelAndView;
     }
 
+
+    @GetMapping("/cards/age/{cardage}")
+    public ResponseEntity<List<Card>>isPersonOfAge(@PathVariable int cardage){
+        try{
+            if (cardage < 18){
+                return ResponseEntity.ok(this.cardRepository.isNotByAge());
+            }
+            else {
+                return ResponseEntity.ok(this.cardRepository.isByAge());
+            }
+            //return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        catch(Exception e){
+            return new ResponseEntity<>(null, HttpStatus.I_AM_A_TEAPOT);
+        }
+
+    }
+
     @DeleteMapping("/cards/{cardId}")
     public void deleteCard(@PathVariable("cardId") Long cardId) {
         try {
