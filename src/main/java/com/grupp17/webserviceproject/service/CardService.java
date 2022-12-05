@@ -21,7 +21,7 @@ public interface CardService {
     ResponseEntity<List<Card>>orderByLastName();
     ResponseEntity<List<Card>>orderByFirstName();
     void deleteCard(@PathVariable("cardId") Long cardId);
-    ResponseEntity<Card> updateCardFirstName(@PathVariable Long cardId, @RequestBody final Card card);
+    ResponseEntity<Card> updateCard(@PathVariable Long cardId, @RequestBody final Card card);
     public ModelAndView index ();
     public ModelAndView addNewCardView ();
     public ModelAndView showCardSortedByAge ();

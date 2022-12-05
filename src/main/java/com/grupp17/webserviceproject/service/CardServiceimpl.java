@@ -60,6 +60,7 @@ public class CardServiceimpl implements CardService {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @Override
     public ResponseEntity<List<Card>>orderByLastName(){
         try {
@@ -88,7 +89,7 @@ public class CardServiceimpl implements CardService {
         }
     }
     @Override
-    public ResponseEntity<Card> updateCardFirstName(@PathVariable Long cardId, @RequestBody final Card card){
+    public ResponseEntity<Card> updateCard(@PathVariable Long cardId, @RequestBody final Card card){
         try{
             Optional<Card> cardOptional = cardRepository.findById(cardId);
             Card cardEntity = cardOptional.get();
@@ -134,7 +135,6 @@ public class CardServiceimpl implements CardService {
 
     @Override
     public String addNewCard(Card card) {
-
         try {
             cardRepository.save(card);
             return "Success!" + "<form th:action=\"@{/}\">\n" +

@@ -21,6 +21,7 @@ public class CardController {
     public ResponseEntity<Card> createCard(@RequestBody final Card card){
        return cardServiceimpl.createCard(card);
     }
+
     @GetMapping("/cards")
     public ResponseEntity<List<Card>> showCards(){
      return cardServiceimpl.showCards();
@@ -56,8 +57,8 @@ public class CardController {
     }
 
     @PutMapping("/cards/{cardId}")
-    public ResponseEntity<Card> updateCardFirstName(@PathVariable Long cardId, @RequestBody final Card card){
-        return cardServiceimpl.updateCardFirstName(cardId, card);
+    public ResponseEntity<Card> updateCard(@PathVariable Long cardId, @RequestBody final Card card){
+        return cardServiceimpl.updateCard(cardId, card);
     }
 
     @GetMapping("/cards/create")
