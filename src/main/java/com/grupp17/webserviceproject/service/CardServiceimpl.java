@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -162,6 +163,18 @@ public class CardServiceimpl implements CardService {
             return new ResponseEntity<>(null, HttpStatus.I_AM_A_TEAPOT);
         }
 
+    }
+
+    @Override
+    public ResponseEntity<?> getRandomQuote(){
+        try {
+            String uri = "https://api.quotable.io/random";
+            RestTemplate restTemplate = new RestTemplate();
+            String result = restTemplate.getForObject(uri, String.class);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
 }

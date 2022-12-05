@@ -29,4 +29,6 @@ public interface CardService {
 
     ResponseEntity<List<Card>>isPersonOfAge(int cardAge);
 
+    ResponseEntity<?> getRandomQuote();
+
 }

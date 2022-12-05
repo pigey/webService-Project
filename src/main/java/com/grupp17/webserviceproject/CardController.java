@@ -1,9 +1,12 @@
 package com.grupp17.webserviceproject;
 
 import com.grupp17.webserviceproject.service.CardServiceimpl;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -76,4 +79,8 @@ public class CardController {
         return cardServiceimpl.isPersonOfAge(cardAge);
     }
 
+    @GetMapping("/quotes/random")
+    public ResponseEntity<?> getRandomQuote () {
+        return cardServiceimpl.getRandomQuote();
+    }
 }
