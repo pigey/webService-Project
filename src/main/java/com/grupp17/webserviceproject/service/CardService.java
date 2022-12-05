@@ -24,6 +24,7 @@ public interface CardService {
     ResponseEntity<Card> updateCardFirstName(@PathVariable Long cardId, @RequestBody final Card card);
     public ModelAndView index ();
     public ModelAndView addNewCardView ();
+    public ModelAndView showCardSortedByAge ();
     String addNewCard(Card card);
 
     ResponseEntity<List<Card>>isPersonOfAge(int cardAge);

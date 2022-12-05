@@ -32,9 +32,10 @@ public class CardController {
     }
 
     @GetMapping("/cards/age")
-    public ResponseEntity<List<Card>>orderByAge(){
-        return cardServiceimpl.orderByAge();
+    public ModelAndView orderByAge(){
+        return cardServiceimpl.showCardSortedByAge();
     }
+
     @GetMapping("/cards/lastName")
     public ResponseEntity<List<Card>>orderByLastName(){
        return cardServiceimpl.orderByLastName();
@@ -69,7 +70,7 @@ public class CardController {
         return cardServiceimpl.addNewCard(card);
     }
 
-    @GetMapping("/cards/age/{cardage}")
+    @GetMapping("/cards/age/{cardAge}")
     public ResponseEntity<List<Card>>isPersonOfAge(@PathVariable int cardAge){
         return cardServiceimpl.isPersonOfAge(cardAge);
     }

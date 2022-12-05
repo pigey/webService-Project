@@ -125,6 +125,14 @@ public class CardServiceimpl implements CardService {
     }
 
     @Override
+    public ModelAndView showCardSortedByAge () {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("sortedByAge");
+        modelAndView.addObject("allCardsByAge", cardRepository.orderByAge());
+        return modelAndView;
+    }
+
+    @Override
     public String addNewCard(Card card) {
 
         try {
@@ -140,9 +148,9 @@ public class CardServiceimpl implements CardService {
     }
 
     @Override
-    public ResponseEntity<List<Card>>isPersonOfAge(@PathVariable int cardage){
+    public ResponseEntity<List<Card>>isPersonOfAge(@PathVariable int cardAge){
         try{
-            if (cardage < 18){
+            if (cardAge < 18){
                 return ResponseEntity.ok(this.cardRepository.isNotByAge());
             }
             else {

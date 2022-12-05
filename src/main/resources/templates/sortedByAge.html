@@ -73,7 +73,7 @@
     </form>
 </div>
 <div class="grid-container">
-    <div class="grid-item" th:each="card:${allCards}">
+    <div class="grid-item" th:each="card:${allCardsByAge}">
         <p class="id" th:text="'Id:' + ' ' + ${card.getId()}"></p>
         <p class="title" th:text="'Name:' + ' ' + ${card.getFirstName()} + ' ' + ${card.getLastName()}"></p>
         <p th:text="'Age:' + ' ' + ${card.getAge()}"></p>
@@ -84,8 +84,8 @@
         >Delete
         </button>
     </div>
-    <form th:action="@{/cards/age}">
-        <input type="submit" value="Sort by age"/>
+    <form th:action="@{/}">
+        <input type="submit" value="Sort by name"/>
     </form>
 </div>
 </div>
