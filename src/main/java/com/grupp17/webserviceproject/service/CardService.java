@@ -5,9 +5,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface CardService {
@@ -21,11 +23,18 @@ public interface CardService {
     ResponseEntity<List<Card>>orderByLastName();
     ResponseEntity<List<Card>>orderByFirstName();
     void deleteCard(@PathVariable("cardId") Long cardId);
-    ResponseEntity<Card> updateCardFirstName(@PathVariable Long cardId, @RequestBody final Card card);
+    ResponseEntity<Card> updateCard(@PathVariable Long cardId, @RequestBody final Card card);
     public ModelAndView index ();
     public ModelAndView addNewCardView ();
     String addNewCard(Card card);
 
     ResponseEntity<List<Card>>isPersonOfAge(int cardAge);
 
+    ResponseEntity<Card> updateFirstName(long cardId, String firstName);
+
+    ResponseEntity<Card> updateLastName(long cardId, String lastName);
+
+    ResponseEntity<Card> updateAge(long cardId, int age);
+
+    ResponseEntity<Card> updateDescription(long cardId, String description);
 }

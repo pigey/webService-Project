@@ -56,7 +56,7 @@ public class CardController {
 
     @PutMapping("/cards/{cardId}")
     public ResponseEntity<Card> updateCardFirstName(@PathVariable Long cardId, @RequestBody final Card card){
-        return cardServiceimpl.updateCardFirstName(cardId, card);
+        return cardServiceimpl.updateCard(cardId, card);
     }
 
     @GetMapping("/cards/create")
@@ -74,4 +74,23 @@ public class CardController {
         return cardServiceimpl.isPersonOfAge(cardAge);
     }
 
+    @PatchMapping("/cards/updateFirstName/{cardId}")
+    public ResponseEntity<Card> updateFirstName(@PathVariable("cardId") long cardId, @RequestParam String firstName){
+        return cardServiceimpl.updateFirstName(cardId, firstName);
+    }
+
+    @PatchMapping("/cards/updateLastName/{cardId}")
+    public ResponseEntity<Card> updateLastName(@PathVariable("cardId") long cardId, @RequestParam String lastName){
+        return cardServiceimpl.updateLastName(cardId, lastName);
+    }
+
+    @PatchMapping("/cards/updateAge/{cardId}")
+    public ResponseEntity<Card> updateAge(@PathVariable("cardId") long cardId, @RequestParam int age){
+        return cardServiceimpl.updateAge(cardId, age);
+    }
+
+    @PatchMapping("/cards/updateDescription/{cardId}")
+    public ResponseEntity<Card> updateDescription(@PathVariable("cardId") long cardId, @RequestParam String description){
+        return cardServiceimpl.updateDescription(cardId, description);
+    }
 }

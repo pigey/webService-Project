@@ -8,9 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -88,7 +90,7 @@ public class CardServiceimpl implements CardService {
         }
     }
     @Override
-    public ResponseEntity<Card> updateCardFirstName(@PathVariable Long cardId, @RequestBody final Card card){
+    public ResponseEntity<Card> updateCard(@PathVariable Long cardId, @RequestBody final Card card){
         try{
             Optional<Card> cardOptional = cardRepository.findById(cardId);
             Card cardEntity = cardOptional.get();
@@ -156,4 +158,61 @@ public class CardServiceimpl implements CardService {
 
     }
 
+
+    @Override
+    public ResponseEntity<Card> updateFirstName(long cardId, String firstName) {
+        try {
+            Optional<Card> card = cardRepository.findById(cardId);
+            Card cardEntity = card.get();
+            cardEntity.setFirstName(firstName);
+            cardRepository.save(cardEntity);
+            return new ResponseEntity<>(cardEntity, HttpStatus.ACCEPTED);
+
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Card> updateLastName(long cardId, String lastName) {
+        try {
+            Optional<Card> card = cardRepository.findById(cardId);
+            Card cardEntity = card.get();
+            cardEntity.setLastName(lastName);
+            cardRepository.save(cardEntity);
+            return new ResponseEntity<>(cardEntity, HttpStatus.ACCEPTED);
+
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseEntity<Card> updateAge(long cardId, int age) {
+        try {
+            Optional<Card> card = cardRepository.findById(cardId);
+            Card cardEntity = card.get();
+            cardEntity.setAge(age);
+            cardRepository.save(cardEntity);
+            return new ResponseEntity<>(cardEntity, HttpStatus.ACCEPTED);
+
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public ResponseEntity<Card> updateDescription(long cardId, String description) {
+
+        try {
+            Optional<Card> card = cardRepository.findById(cardId);
+            Card cardEntity = card.get();
+            cardEntity.setDescription(description);
+            cardRepository.save(cardEntity);
+            return new ResponseEntity<>(cardEntity, HttpStatus.ACCEPTED);
+
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
 }
