@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface CardService {
@@ -30,5 +31,7 @@ public interface CardService {
     ResponseEntity<List<Card>>isPersonOfAge(int cardAge);
 
     ResponseEntity<?> getRandomQuote();
+
+    ResponseEntity<Card> updateField(long cardId, Map<Object, Object> updates);
 
 }

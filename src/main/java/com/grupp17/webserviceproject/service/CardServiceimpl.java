@@ -2,16 +2,21 @@ package com.grupp17.webserviceproject.service;
 
 import com.grupp17.webserviceproject.Card;
 import com.grupp17.webserviceproject.CardRepository;
+import org.apache.el.util.ReflectionUtil;
+import org.aspectj.util.Reflection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -176,5 +181,27 @@ public class CardServiceimpl implements CardService {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @Override
+    public ResponseEntity<Card> updateField(long cardId, Map<Object, Object> updates) {
+        try {
+
+            Card card = cardRepository.findById(cardId).get();
+
+            updates.forEach((key, value) -> {
+                Field field = ReflectionUtils.findField(Card.class, (String) key);
+                field.setAccessible(true);
+                ReflectionUtils.setField(field, card, value);
+            });
+            cardRepository.save(card);
+
+            return new ResponseEntity<>(card, HttpStatus.OK);
+
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
 }
