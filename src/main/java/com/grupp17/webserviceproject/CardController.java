@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -82,5 +83,11 @@ public class CardController {
     @GetMapping("/quotes/random")
     public ResponseEntity<?> getRandomQuote () {
         return cardServiceimpl.getRandomQuote();
+    }
+
+    @PatchMapping("/cards/{cardId}")
+    public ResponseEntity<Card> updateField (@PathVariable("cardId") long cardId, @RequestBody Map<Object, Object> updates) {
+        return cardServiceimpl.updateField(cardId, updates);
+
     }
 }
